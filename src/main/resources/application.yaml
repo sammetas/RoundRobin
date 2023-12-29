@@ -5,12 +5,13 @@ spring:
 
 round:
   apis:
-    instances: ["localhost:8081" , "localhost:8082" ,"localhost:8083" ]
+    instances: ["localhost:8081" , "localhost:8082" ,"localhost:8083" , "localhost:8084"]
     baseUrl: "http://"
     simpleApiUrl: "/api/v1/game"
     simpleApiPing: "/api/v1/ping"
     thresholdLatency: 500
     sleepTime: 0
+    fixedDelay: 10000
 
 
 server:

@@ -20,6 +20,7 @@ public class InstanceConfig {
     private String simpleApiPing;
     private String thresholdLatency;
     private String sleepTime;
+    private String fixedDelay;
 
 
 }
