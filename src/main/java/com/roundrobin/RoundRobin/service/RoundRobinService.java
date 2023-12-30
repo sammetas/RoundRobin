@@ -5,6 +5,7 @@ import com.roundrobin.RoundRobin.model.InstanceSpeed;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -93,6 +94,7 @@ public class RoundRobinService {
             } else if (duration >= 2 * thresholdLatency) {
                 updateApiSpeedMap(instance, InstanceSpeed.SLOWER);
             }
+
             return response.getStatusCode().is2xxSuccessful();
         } catch (RestClientException e) {
             return false;
@@ -139,7 +141,7 @@ public class RoundRobinService {
 
     }
 
-    private void addInstancesAndUpdateSpeedMap(List<String> instancesTobeAdded) {
+    public void addInstancesAndUpdateSpeedMap(List<String> instancesTobeAdded) {
         if (!instancesTobeAdded.isEmpty()) {
             instances.addAll(instancesTobeAdded);
             size += instancesTobeAdded.size();

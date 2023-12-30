@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
+import java.util.List;
 
 @Component
 @Setter
@@ -14,7 +15,7 @@ import java.util.LinkedList;
 @ConfigurationProperties(prefix = "round.apis")
 public class InstanceConfig {
 
-    private LinkedList<String> instances;
+    private List<String> instances;
     private String baseUrl;
     private String simpleApiUrl;
     private String simpleApiPing;
