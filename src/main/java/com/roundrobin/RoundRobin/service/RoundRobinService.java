@@ -5,7 +5,6 @@ import com.roundrobin.RoundRobin.model.InstanceSpeed;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -77,8 +76,9 @@ public class RoundRobinService {
             }
         }
         if (instancesTobeRemoved.size() > 0) {
-            size -= instancesTobeRemoved.size();
+            //size -= instancesTobeRemoved.size();
             instances.removeAll(instancesTobeRemoved);
+            size = instances.size();
         }
         return workingInstance;
     }
@@ -117,6 +117,7 @@ public class RoundRobinService {
             apiSpeedMap.put(instance, InstanceSpeed.NORMAL); //Presume all instances are normal initially
         });
         thresholdLatency = Long.parseLong(this.config.getThresholdLatency());
+        healthCheckAndUpdateList(); //In case config contains 4 but only less instances started.
     }
 
     private String generateTheSimpleApiURL(String instanceName) {
